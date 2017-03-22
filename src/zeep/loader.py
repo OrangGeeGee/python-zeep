@@ -40,6 +40,7 @@ def parse_xml(content, transport, base_url=None, strict=False):
     parser = etree.XMLParser(
         remove_comments=True, resolve_entities=False, recover=recover)
     parser.resolvers.add(ImportResolver(transport))
+    content = bytes(content.decode('latin-1'), encoding='utf-8')
     try:
         return fromstring(content, parser=parser, base_url=base_url)
     except etree.XMLSyntaxError as exc:
